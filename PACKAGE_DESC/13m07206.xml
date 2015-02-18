@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v5 rel. 4 U (http://www.xmlspy.com) by Klaus Popp (MEN Mikro Elektronik GmbH) -->
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="packagedesc.xsd">
+	<name>13m07206</name>
+	<description>MDIS5 driver package for MEN M72 M-Module</description>
+	<date>2010-04-20</date>
+	<revision>3.1</revision>
+	<docroot>DRIVERS/MDIS_LL/M072/DOC/main.html</docroot>
+	   <modellist>
+  	     <model>
+		 	 <hwname>M72</hwname>
+		 	 <modelname>M72</modelname>
+		 	 <description>Motion Counter</description>
+		 	 <devtype>MDIS</devtype>
+		 	 <autoid>
+		 	 <mmoduleid>0x53460048</mmoduleid>
+		 	 </autoid>
+		 	 <busif>M-Module</busif>
+			 <swmodulelist>
+ 		 	 <swmodule>
+		 	 	<name>m72</name>
+		 	 	<description>Driver for M72</description>
+		 	 	<type>Low Level Driver</type>
+		 	 	<makefilepath>M072/DRIVER/COM/driver.mak</makefilepath>
+	 	 	 </swmodule>
+			</swmodulelist>
+		 </model>
+		 <model>
+		    <hwname>M72</hwname>
+		    <modelname>M72_PRE</modelname>
+		    <description>Motion Counter with Pretrigger support</description>
+		    <devtype>MDIS</devtype>
+		    <autoid>
+		    <mmoduleid>0x53460048</mmoduleid>
+		    </autoid>
+		    <busif>M-Module</busif>
+			<swmodulelist>
+			<swmodule>
+				<name>m72_pre</name>
+				<description>Driver for M72 pretrigger Variant</description>
+				<type>Low Level Driver</type>
+				<makefilepath>M072/DRIVER/COM/driver_pre.mak</makefilepath>
+			</swmodule>
+			</swmodulelist>
+		 </model>
+		</modellist>
+		<settinglist>
+		<setting>
+			<name>ID_CHECK</name>
+			<description>Define if M-Module ID-PROM is checked</description>
+			<type>U_INT32</type>
+			<defaultvalue>1</defaultvalue>
+			<choises>
+				<choise>
+					<value>1</value>
+					<description>enable</description>
+				</choise>
+				<choise>
+					<value>0</value>
+					<description>disable -- ignore IDPROM</description>
+				</choise>
+			</choises>
+		</setting>
+		<setting>
+			<name>PLD_LOAD</name>
+			<description>Define if PLD is to be loaded at INIT</description>
+			<type>U_INT32</type>
+			<defaultvalue>1</defaultvalue>
+			<choises>
+				<choise>
+					<value>1</value>
+					<description>load PLD</description>
+				</choise>
+				<choise>
+					<value>0</value>
+					<description>don't load PLD</description>
+				</choise>
+			</choises>
+		</setting>
+		<setting>
+			<name>OUT_MODE</name>
+			<description>output signal mode, see user manual</description>
+			<type>U_INT32</type>
+			<defaultvalue>0x0</defaultvalue>
+		</setting>
+		<setting>
+			<name>OUT_SET</name>
+			<description>output signal setting, see user manual</description>
+			<type>U_INT32</type>
+			<defaultvalue>0x0</defaultvalue>
+			<maxvalue>0xf</maxvalue>
+		</setting>
+		<settingsubdir rangestart="0" rangeend="3">
+			<name>CHANNEL_</name>
+			<setting>
+				<name>CNT_MODE</name>
+				<description>counter mode, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>10</maxvalue>
+			</setting>
+			<setting>
+				<name>CNT_PRELOAD</name>
+				<description>counter preload condition, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>3</maxvalue>
+			</setting>
+			<setting>
+				<name>CNT_CLEAR</name>
+				<description>counter clear condition, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>3</maxvalue>
+			</setting>
+			<setting>
+				<name>CNT_STORE</name>
+				<description>counter store condition, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>3</maxvalue>
+			</setting>
+			<setting>
+				<name>ENB_IRQ</name>
+				<description>global interrupt facility, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>1</maxvalue>
+			</setting>
+			<setting>
+				<name>COMP_IRQ</name>
+				<description>comparator interrupt condition, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>5</maxvalue>
+			</setting>
+			<setting>
+				<name>CYBW_IRQ</name>
+				<description>carry/borrow interrupt condition, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>3</maxvalue>
+			</setting>
+			<setting>
+				<name>LBREAK_IRQ</name>
+				<description>Line break interrupt enable, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>1</maxvalue>
+			</setting>
+			<setting>
+				<name>XIN2_IRQ</name>
+				<description>xIN2 edge interrupt enable, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>1</maxvalue>
+			</setting>
+			<setting>
+				<name>VAL_PRELOAD</name>
+				<description>counter preload value</description>
+				<type>U_INT32</type>
+				<defaultvalue>0x0</defaultvalue>
+			</setting>
+			<setting>
+				<name>VAL_COMPA</name>
+				<description>comparator A value</description>
+				<type>U_INT32</type>
+				<defaultvalue>0x0</defaultvalue>
+			</setting>
+			<setting>
+				<name>VAL_COMPB</name>
+				<description>comparator B value</description>
+				<type>U_INT32</type>
+				<defaultvalue>0x0</defaultvalue>
+			</setting>
+			<setting>
+				<name>READ_MODE</name>
+				<description>mode for read calls</description>
+				<type>U_INT32</type>
+				<defaultvalue>2</defaultvalue>
+				<choises>
+					<choise>
+						<value>0</value>
+						<description>read latched value</description>
+					</choise>
+					<choise>
+						<value>1</value>
+						<description>wait for ready interrupt</description>
+					</choise>
+					<choise>
+						<value>2</value>
+						<description>force counter latch</description>
+					</choise>
+				</choises>
+			</setting>
+			<setting>
+				<name>READ_TIMEOUT</name>
+				<description>Timeout for read calls in ms</description>
+				<type>U_INT32</type>
+				<defaultvalue>0xffffffff</defaultvalue>
+			</setting>
+			<setting>
+				<name>WRITE_MODE</name>
+				<description>mode for write calls</description>
+				<type>U_INT32</type>
+				<defaultvalue>2</defaultvalue>
+				<choises>
+					<choise>
+						<value>0</value>
+						<description>load preload register</description>
+					</choise>
+					<choise>
+						<value>2</value>
+						<description>force counter load</description>
+					</choise>
+				</choises>
+			</setting>
+			<setting>
+				<name>TIMER_START</name>
+				<description>timer start condition, see user manual</description>
+				<type>U_INT32</type>
+				<defaultvalue>0</defaultvalue>
+				<maxvalue>1</maxvalue>
+			</setting>
+		</settingsubdir>
+	</settinglist>
+	<!-- Global software modules -->
+	<swmodulelist>
+		<swmodule>
+			<name>m72_freq</name>
+			<description>M72 example for frequency measurement</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/EXAMPLE/M72_FREQ/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule>
+			<name>m72_out</name>
+			<description>M72 example for output setting</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/EXAMPLE/M72_OUT/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule>
+			<name>m72_pulse</name>
+			<description>M72 example for pulse width measurement</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/EXAMPLE/M72_PULSE/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule>
+			<name>m72_single</name>
+			<description>M72 example for single count mode</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/EXAMPLE/M72_SINGLE/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule>
+			<name>m72_timer</name>
+			<description>M72 example for timer mode</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/EXAMPLE/M72_TIMER/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule>
+			<name>m72_period</name>
+			<description>M72 example for period measurement</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/EXAMPLE/M72_PERIOD/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule>
+			<name>m72_pretrig</name>
+			<description>M72 example for initializing pretrigger</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/EXAMPLE/M72_PRETRIG/COM/program.mak</makefilepath>
+		</swmodule>
+		<swmodule>
+			<name>m72_count</name>
+			<description>Configure and read M72 counter channel</description>
+			<type>Driver Specific Tool</type>
+			<makefilepath>M072/TOOLS/M72_COUNT/COM/program.mak</makefilepath>
+		</swmodule>
+	</swmodulelist>
+</package>

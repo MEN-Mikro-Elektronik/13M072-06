@@ -1,0 +1,226 @@
+Program Description
+===================
+Tue Mar 19 11:58:04  2002
+ 
+Overview of all Programs
+------------------------
+
+m72_freq         - M72 example for frequency measurement
+m72_out          - M72 example for output setting
+m72_period       - M72 example for period measurement
+m72_pulse        - M72 example for pulse width measurement
+m72_single       - M72 example for single count mode
+m72_timer        - M72 example for timer mode
+m72_count        - Configure and read M72 counter channel
+
+Program m72_freq
+----------------
+
+Usage:
+   m72_freq <device> <chan>
+
+Function:
+   M72 example for frequency measurement
+
+Options:
+   device       device name   
+   chan         channel number (0..n)   
+   
+Description:
+   M72 example for frequency measurement   
+   
+   Configuration:   
+   - frequency measurement mode   
+   - read mode: wait for ready before read   
+   
+   Measurement:   
+   - start measurement   
+   - read counter of channel   
+   
+Program m72_out
+---------------
+
+Usage:
+   m72_out <device>
+
+Function:
+   M72 example for output setting
+
+Options:
+   device       device name   
+   
+Description:
+   M72 example for output setting   
+   
+   Configuration:   
+   - (none)   
+   
+   Output:   
+   - Toggle Control_1..4 Outputs   
+   
+Program m72_period
+------------------
+
+Usage:
+   m72_period <device> <chan>
+
+Function:
+   M72 example for period measurement
+
+Options:
+   device       device name   
+   chan         channel number (0..n)   
+   
+Description:
+   M72 example for period measurement   
+   
+   Configuration:   
+   - period measurement   
+   - read mode: wait for ready before read   
+   
+   Measurement:   
+   - start measurement by counter clear   
+   - read counter of channel 0   
+   
+Program m72_pulse
+-----------------
+
+Usage:
+   m72_pulse <device> <chan>
+
+Function:
+   M72 example for pulse width measurement
+
+Options:
+   device       device name   
+   chan         channel number (0..n)   
+   
+Description:
+   M72 example for pulse width measurement   
+   
+   Configuration:   
+   - pulse width high measurement   
+   - read mode: wait for ready before read   
+   
+   Measurement:   
+   - start measurement by counter clear   
+   - read counter of channel 0   
+   
+Program m72_single
+------------------
+
+Usage:
+   m72_single <device> <chan>
+
+Function:
+   M72 example for single count mode
+
+Options:
+   device       device name   
+   chan         channel number (0..n)   
+   
+Description:
+   M72 example for single count mode   
+   
+   Configuration:   
+   - single counter mode   
+   - signal on comparator match (0x1000)   
+   - clear counter with comparator match   
+   
+   Measurement:   
+   - latch and read counter of channel 0   
+   
+Program m72_timer
+-----------------
+
+Usage:
+   m72_timer <device> <chan>
+
+Function:
+   M72 example for timer mode
+
+Options:
+   device       device name   
+   chan         channel number (0..n)   
+   
+Description:
+   M72 example for timer mode   
+   
+   Configuration:   
+   - timer mode   
+   - signal on comparator match (1sec: 0x2625a0)   
+   - clear counter with comparator match   
+   - start timer initially with counter clear   
+   - read mode: latch before read   
+   - NOTE: timer direction must be UP   
+   
+   Measurement:   
+   - read counter of channel 0   
+   - wait for signals   
+   - calculate timestamps   
+   
+Program m72_count
+-----------------
+
+Usage:
+   m72_count [<opts>] <device> [<opts>]
+
+Function:
+   Configure and read M72 counter channel
+
+Options:
+   device       device name                            [none]   
+   -c=<chan>    channel number (0..3)                  [none]   
+   -R=<mode>    mode for read  calls                   [none]   
+      
+   -W=<mode>    mode for write calls                   [none]   
+      
+   -m=<mode>    counter mode                           [none]   
+      
+   -p=<cond>    counter preload condition              [none]   
+      
+   -e=<cond>    counter clear   condition              [none]   
+      
+   -s=<cond>    counter store   condition              [none]   
+      
+   -o=<comp>    comparator   irq condition             [none]   
+      
+   -y=<comp>    carry/borrow irq condition             [none]   
+      
+   -k=<enb>     line-break   irq enable                [none]   
+      
+   -r=<enb>     xIN2 edge    irq enable                [none]   
+      
+   -x=<enb>     per channel  irq enable                [none]   
+      
+   -t=<enb>     timer start condition (timer mode)     [none]   
+      
+   -a=<val>     comparator A value (hex)               [none]   
+   -b=<val>     comparator B value (hex)               [none]   
+   -u=<val>     counter preload value (hex)            [none]   
+   -i=<mode>    output signal mode (hex)               [none]   
+   -g=<set>     output signal setting (hex)            [none]   
+   -f=<conf>    selftest configuration (hex)           [none]   
+   -1=<sigcode> install ready        signal (0=none)   [none]   
+   -2=<sigcode> install comparator   signal (0=none)   [none]   
+   -3=<sigcode> install carry/borrow signal (0=none)   [none]   
+   -4=<sigcode> install line-break   signal (0=none)   [none]   
+   -5=<sigcode> install XIN2         signal (0=none)   [none]   
+       sigcode..see usr_os.h      
+   -l           loop mode                              [OFF]   
+   -d=<msec>    loop mode delay (0=none) [msec]        [200]   
+   -v           verbose (print current values)         [OFF]   
+   -n           do not read counter                    [OFF]   
+   -h           print detailed values for all options     
+   -<opt>=?     print detailed values for option <opt>    
+   -?           print this help   
+
+Description:
+   Configure and read M72 counter channel   
+   
+   Universal tool for configuring M72 and make measurements   
+   with all counter modes.   
+   The modules interrupt is enabled trough the M_MK_IRQ_ENABLE   
+   setstat call.    
+   
+

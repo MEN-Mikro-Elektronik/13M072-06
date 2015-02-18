@@ -1,0 +1,315 @@
+
+
+ts@men: from here on package 13M072-06 is maintained in Git.
+git commit messages added above.
+
+===== [ History of fileset ART/13M072-06/13M072-06 ] =====
+
+-----[ Revision 3.1 ]-----
+[ 2010-04-20 15:16:16 by amorbach ]
+R.1: Porting to MDIS5
+  2: MDVE test failed
+M.1: Changed according to MDIS Porting Guide 0.8
+  2: Macros adde to enable variant specific substitution
+
+-----[ Revision 3.0 ]-----
+[ 2008-02-26 17:48:31 by ts ]
+All driver models:
+ overhauled FPGA content, fixes functional and M-Modul interface timing errors
+ added detailled ID String to deliver exact driver and TTF File information
+m72_drv_pretrig.c:
+   TimerA simultaneously latched/cleared to enable continous period measurement
+   Interrupt enabled with SetStat EN_PRETRIG only
+   dont return Error when M_MK_IRQ_ENABLE is called
+m72_pld.c:
+   cosmetics: complete file history added again
+
+-----[ Revision 2.3 ]-----
+[ 2006-10-04 18:07:03 by ts ]
+ä
+changed Standard PLD File back to m72_pld.c
+13m07206.xml RCS:
+   bugfix in Model description
+
+-----[ Revision 2.2 ]-----
+[ 2006-09-27 18:59:25 by ts ]
+D
+Split driver in 2 Models for Standard and pretriggering Variant
+
+-----[ Revision 2.1 ]-----
+[ 2004-10-11 16:35:29 by dpfeuffer ]
+m72_pld.c PLD data changed:
+  Problem: Output control register 1 and output control register 2 cannot be distinguished.
+  Solution: M-Modul interface has been changed. Both register may be accessed now.
+
+-----[ Revision 2.0 ]-----
+[ 2004-08-30 12:20:42 by dpfeuffer ]
+minor modifications for MDIS4/2004 conformity
+
+-----[ Revision 1.4 ]-----
+[ 2002-08-29 14:02:16 by LSchoberl ]
+*** CHANGED FILES ***
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_max.dsc RCS 1.4 -> RCS 1.5
+   cosmetics
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_min.dsc RCS 1.2 -> RCS 1.3
+   changed default board to D201_1
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.c RCS 1.5 -> RCS 1.6
+   new pld data
+
+-----[ Revision 1.3 ]-----
+[ 2002-03-19 11:11:14 by Schoberl ]
+*** ADDED FILES ***
+Files for swapped access support added:
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/driver_sw.mak
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_sw_max.dsc
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_sw_min.dsc
+*** CHANGED FILES ***
+Documentation updated:
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.html RCS 1.2 -> RCS 1.3
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.txt RCS 1.2 -> RCS 1.3
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/tools.txt RCS 1.2 -> RCS 1.3
+Swapped access support added:
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_drv.c RCS 1.7 -> RCS 1.8
+   cosmetics; swapped access variant support
+File /_CVS_/COM/INCLUDE/m72_drv.h RCS 2.2 -> RCS 2.3
+   cosmetics, support for swapped variant
+
+-----[ Revision 1.2 ]-----
+[ 1999-08-06 15:34:55 by Schoberl ]
+*** DELETED FILES ***
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/examples.txt
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/M72_1R0B.TTF
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_CASC/COM/m72_casc.c
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_CASC/COM/program.mak
+*** ADDED FILES ***
+File /_CVS_/COM/INCLUDE/dbg.h
+File /_CVS_/COM/INCLUDE/desc.h
+File /_CVS_/COM/INCLUDE/ll_defs.h
+File /_CVS_/COM/INCLUDE/ll_entry.h
+File /_CVS_/COM/INCLUDE/maccess.h
+File /_CVS_/COM/INCLUDE/mdis_api.h
+File /_CVS_/COM/INCLUDE/mdis_com.h
+File /_CVS_/COM/INCLUDE/mdis_err.h
+File /_CVS_/COM/INCLUDE/men_typs.h
+File /_CVS_/COM/INCLUDE/microwire.h
+File /_CVS_/COM/INCLUDE/oss.h
+File /_CVS_/COM/INCLUDE/pld_load.h
+File /_CVS_/COM/INCLUDE/usr_oss.h
+File /_CVS_/COM/INCLUDE/usr_utl.h
+*** FILES WITH NEW TARGET LOCATION ***
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.html ./DRIVERS/MDIS_LL/M072/DOC/m72_drv.html -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DOC/m72_drv.html
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.txt ./DRIVERS/MDIS_LL/M072/DOC/m72_drv.txt -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DOC/m72_drv.txt
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/main.html ./DRIVERS/MDIS_LL/M072/DOC/main.html -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DOC/main.html
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/tools.txt ./DRIVERS/MDIS_LL/M072/DOC/tools.txt -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DOC/tools.txt
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/driver.mak ./DRIVERS/MDIS_LL/M072/DRIVER/COM/driver.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DRIVER/COM/driver.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_drv.c ./DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_drv.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_drv.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_max.dsc ./DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_max.dsc -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_max.dsc
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_min.dsc ./DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_min.dsc -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_min.dsc
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.c ./DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_pld.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.h ./DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.h -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_pld.h
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/program.mak ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/program.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_FREQ/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/m72_out.c ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/m72_out.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_OUT/COM/m72_out.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/program.mak ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/program.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_OUT/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/program.mak ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/program.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PERIOD/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/program.mak ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/program.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PULSE/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/program.mak ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/program.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_SINGLE/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/program.mak ./DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/program.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_TIMER/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/m72_count.c ./DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/m72_count.c -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/TOOLS/M72_COUNT/COM/m72_count.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/program.mak ./DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/program.mak -> ./%(OS_TRGT_PREFIX)%(MDIS_DRV_SRC)/M072/TOOLS/M72_COUNT/COM/program.mak
+/_CVS_/COM/INCLUDE/m72_drv.h ./INCLUDE/COM/MEN/m72_drv.h -> ./%(OS_TRGT_PREFIX)%(COM_INC)/MEN/m72_drv.h
+*** FILES WITH NEW WORK LOCATION ***
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.html ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DOC/m72_drv.html -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DOC/m72_drv.html
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.txt ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DOC/m72_drv.txt -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DOC/m72_drv.txt
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/main.html ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DOC/main.html -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DOC/main.html
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/tools.txt ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DOC/tools.txt -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DOC/tools.txt
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/driver.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DRIVER/COM/driver.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DRIVER/COM/driver.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_drv.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DRIVER/COM/m72_drv.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_drv.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_max.dsc ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DRIVER/COM/m72_max.dsc -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_max.dsc
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_min.dsc ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DRIVER/COM/m72_min.dsc -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_min.dsc
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DRIVER/COM/m72_pld.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_pld.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.h ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/DRIVER/COM/m72_pld.h -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/DRIVER/COM/m72_pld.h
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/program.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/program.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_FREQ/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/m72_out.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/m72_out.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_OUT/COM/m72_out.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/program.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/program.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_OUT/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/program.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/program.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PERIOD/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/program.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/program.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_PULSE/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/program.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/program.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_SINGLE/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/program.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/program.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/EXAMPLE/M72_TIMER/COM/program.mak
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/m72_count.c ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/TOOLS/M72_COUNT/COM/m72_count.c -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/TOOLS/M72_COUNT/COM/m72_count.c
+/_CVS_/COM/DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/program.mak ./OS9/MWOS/OS9/SRC/IO/MDIS_LL/M072/TOOLS/M72_COUNT/COM/program.mak -> ./%(OS_PREFIX)/%(MDIS_DRV_SRC)/M072/TOOLS/M72_COUNT/COM/program.mak
+/_CVS_/COM/INCLUDE/m72_drv.h ./OS9/MWOS/SRC/DEFS/MEN/m72_drv.h -> ./%(OS_PREFIX)/%(COM_INC)/MEN/m72_drv.h
+*** FILES WITH NEW CATEGORIES ***
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.html  -> public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.txt  -> public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/main.html  -> public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/tools.txt  -> public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/driver.mak  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_drv.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_max.dsc  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_min.dsc  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.h  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/program.mak  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/m72_out.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/program.mak  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/program.mak  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/program.mak  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/program.mak  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/program.mak  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/m72_count.c  -> src,public
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/program.mak  -> src,public
+File /_CVS_/COM/INCLUDE/m72_drv.h  -> src,public
+*** CHANGED FILES ***
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.html RCS 1.1 -> RCS 1.2
+   cosmetics
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/m72_drv.txt RCS 1.1 -> RCS 1.2
+   cosmetics
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/main.html RCS 1.1 -> RCS 1.2
+   cosmetics
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DOC/tools.txt RCS 1.1 -> RCS 1.2
+   cosmetics
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/driver.mak RCS 1.1 -> RCS 1.3
+   microwire added
+   mbuf removed
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_drv.c RCS 1.3 -> RCS 1.7
+   cosmetics
+   removed C++ comment
+   ll-functions static now
+   added:
+   - declarations for low-level functions
+   - variant for swapped access possible
+   - register and bit definitions
+   - interrupt per channel handling (new bit IRQEnb in interrupt control
+   registers)
+   - signal for xIN2 Edge interrupt
+   - OSS_SemWait uses now timeout value write access
+   - IRQs are now counted in ISR
+   - ISR can distinguish Ready and xIN2 Edge int.,
+   - xIN2 Edge int available in all counter modes
+   - access to Interrupt Status Register
+   - casts
+   - GetStat: M_LL_ID_SIZE and M_LL_BLK_ID_DATA can be used
+   removed:
+   - help flag readAvail
+   - write semaphore
+   - write mode 1,3
+   - read mode 3
+   - counter mode 8
+   changed:
+   - SetStat: M_MK_IRQ_COUNT to M_LL_IRQ_COUNT
+   		- Init: output setting before output mode setting
+   - read mode flags not ORed anymore
+   - write mode flags not ORed anymore
+   M72_Init() : descriptor entry CHANNEL_n/READ_TIMEOUT added
+   M72_Read() : OSS_SemWait uses now timeout value
+   M72_SetStat(), M72_GetStat() : M72_READ_TIMEOUT added
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_max.dsc RCS 1.1 -> RCS 1.4
+   new items added
+   READ_TIMEOUT added
+   DEBUG_LEVEL_MBUF removed
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_min.dsc RCS 1.1 -> RCS 1.2
+   cosmetics
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/DRIVER/COM/m72_pld.c RCS 1.4 -> RCS 1.5
+   new pld data
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_FREQ/COM/m72_freq.c RCS 1.1 -> RCS 1.4
+   cosmetics
+   added headers stdlib.h, string.h
+   cosmetics
+   functions static
+   main directly called in all systems now
+   added:
+   -setstat for IRQ enable per channel
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_OUT/COM/m72_out.c RCS 1.1 -> RCS 1.4
+   cosmetics
+   added headers stdlib.h, string.h
+   cosmetics
+   functions static
+   main directly called in all systems now
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PERIOD/COM/m72_period.c RCS 1.1 -> RCS 1.4
+   cosmetics
+   added headers stdlib.h, string.h
+   cosmetics
+   functions static
+   main directly called in all systems now
+   added:
+   -setstat for IRQ enable per channel
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_PULSE/COM/m72_pulse.c RCS 1.1 -> RCS 1.4
+   cosmetics
+   added headers stdlib.h, string.h
+   cosmetics
+   functions static
+   main directly called in all systems now
+   added:
+   -setstat for IRQ enable per channel
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_SINGLE/COM/m72_single.c RCS 1.1 -> RCS 1.4
+   cosmetics
+   added headers stdlib.h, string.h
+   cosmetics
+   functions static
+   main directly called in all systems now
+   added:
+   - setstat for IRQ enable per channel
+   - deinstall comparator signal if installed
+   removed:
+   - printf in sigHandler
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/EXAMPLE/M72_TIMER/COM/m72_timer.c RCS 1.2 -> RCS 1.5
+   cosmetics
+   added headers stdlib.h, string.h
+   cosmetics
+   functions static
+   main directly called in all systems now
+   added:
+   - setstat for IRQ enable per channel
+   - deinstall comparator signal if installed
+   removed:
+   - printf in SigHandler
+File /_CVS_/COM/DRIVERS/MDIS_LL/M072/TOOLS/M72_COUNT/COM/m72_count.c RCS 1.3 -> RCS 1.6
+   cosmetics
+   added headers stdlib.h, string.h
+   cosmetics
+   functions static
+   adapted to current driver
+   added:
+   - count mode 6,7,9: counter preload in loop mode
+   - signal for XIN2
+   - interrupt per channel
+   removed:
+   - recursive abort when error occures while disabling interrupt
+File /_CVS_/COM/INCLUDE/m72_drv.h RCS 2.1 -> RCS 2.2
+   cosmetics
+   fixed:
+   - M72 output signal mode macro
+   added:
+   - declarations for ll-functions
+   - variant for swapped access possible
+   - M72_READ_TIMEOUT
+   - M72_SIGSET_XIN2
+   - M72_SIGCLR_XIN2
+   - M72_INT_STATUS
+   removed:
+   - now needless read/write flags
+   - defines for counter mode 8
+   changed:
+   - M72_OUTCFG macro
+   - read mode flags not ORed anymore
+   - write mode flags not ORed anymore
+
+-----[ Revision 1.1 ]-----
+[ 1998-11-04 10:58:15 by see ]
+Added by mcvs
+

@@ -1,0 +1,828 @@
+Function Description
+====================
+Tue Mar 19 11:57:58  2002
+ 
+Overview of all Functions
+-------------------------
+
+M72_GetEntry           - Initialize driver's jump table 
+M72_Init               - Allocate and return low-level handle, initialize hardware 
+M72_Exit               - De-initialize hardware and clean up memory 
+M72_Read               - Read a value from the device 
+M72_Write              - Write a value to the device 
+M72_SetStat            - Set the driver status 
+M72_GetStat            - Get the driver status 
+M72_BlockRead          - Read a data block from the device 
+M72_BlockWrite         - Write a data block to the device 
+M72_Irq                - Interrupt service routine 
+M72_Info               - Get information about hardware and driver requirements. 
+ 
+
+Function M72_GetEntry()
+-----------------------
+
+Syntax:
+    #ifdef _ONE_NAMESPACE_PER_DRIVER_
+        extern void LL_GetEntry( LL_ENTRY* drvP )
+    #else
+    # ifdef MAC_BYTESWAP
+        extern void M72_SW_GetEntry( LL_ENTRY* drvP )
+    # else
+        extern void M72_GetEntry( LL_ENTRY* drvP )
+    # endif
+    #endif
+
+Description:
+    Initialize driver's jump table
+
+Input:
+    ---
+
+Output:
+    drvP  pointer to the initialized jump table structure
+
+
+Function M72_Init()
+-------------------
+
+Syntax:
+    static int32 M72_Init(
+        DESC_SPEC       *descP,
+        OSS_HANDLE      *osHdl,
+        MACCESS         *ma,
+        OSS_SEM_HANDLE  *devSemHdl,
+        OSS_IRQ_HANDLE  *irqHdl,
+        LL_HANDLE       **llHdlP
+    )
+
+Description:
+    Allocate and return low-level handle, initialize hardware
+
+    The function initially loads the module's PLD, if
+    this is not explicitly disabled by PLD_LOAD=0.
+
+    Then the function clears all counters and initializes 
+    all channels with the definitions made in the
+    descriptor.
+    The counters are configured as follows:
+    - clear the counter
+    - write comparator A value
+    - write comparator B value
+    - write comparator preload value
+    - set the clear, load, store (latch) conditions
+    - set the timer start and counter mode condition
+    - set the interrupt conditions
+    then the output settings and output mode is set.
+    The Self-test Register is set to zero.
+
+    The following descriptor keys are used:
+
+    Descriptor key         Default          Range
+    ---------------------  ---------------  -------------
+    DEBUG_LEVEL_DESC       OSS_DBG_DEFAULT  see dbg.h
+    DEBUG_LEVEL            OSS_DBG_DEFAULT  see dbg.h
+    ID_CHECK               1                0..1 
+    PLD_LOAD               1                0..1 
+    OUT_MODE               0                0..max
+    OUT_SET                0                0..0xf
+    CHANNEL_n/CNT_MODE     0                0..7,9,10  (1)
+    CHANNEL_n/CNT_PRELOAD  0                0..3    
+    CHANNEL_n/CNT_CLEAR    0                0..3    
+    CHANNEL_n/CNT_STORE    0                0..2    
+    CHANNEL_n/ENB_IRQ      0                0..1
+    CHANNEL_n/COMP_IRQ     0                0..5
+    CHANNEL_n/CYBW_IRQ     0                0..3
+    CHANNEL_n/LBREAK_IRQ   0                0..1
+    CHANNEL_n/XIN2_IRQ     0                0..1
+    CHANNEL_n/VAL_PRELOAD  0                0..max
+    CHANNEL_n/VAL_COMPA    0                0..max
+    CHANNEL_n/VAL_COMPB    0                0..max
+    CHANNEL_n/READ_MODE    2                0..2  
+    CHANNEL_n/READ_TIMEOUT 0xffffffff       0..0xffffffff ms
+    CHANNEL_n/WRITE_MODE   2                0, 2    (2)
+    CHANNEL_n/TIMER_START  0                0..1
+
+    (1) value 8 is not valid.
+    (2) only values 0 and 2 are used for write mode.
+
+    PLD_LOAD defines if the PLD is loaded at M72_Init.
+    With PLD_LOAD disabled, ID_CHECK is implicitly disabled.
+    (This key is for test purposes and should always be set to 1.)
+
+    OUT_MODE defines the output signal mode.
+    (see SetStat: M72_OUT_MODE)
+
+    OUT_SET defines the output signal setting.
+    (see SetStat: M72_OUT_SET)
+
+    CNT_MODE defines the counter mode of channel n.
+    (see M72_SetStat: M72_CNT_MODE)
+        NOTE: Value 8 is not a valid counter mode!
+
+    CNT_PRELOAD defines the counter preload condition of channel n.
+    (see M72_SetStat: M72_CNT_PRELOAD)
+
+    CNT_CLEAR defines the counter clear condition of channel n.
+    (see M72_SetStat: M72_CNT_CLEAR)
+
+    CNT_STORE defines the counter store condition of channel n.
+    (see M72_SetStat: M72_CNT_STORE)
+
+    ENB_IRQ defines the interrupt facility of channel n.
+    (see M72_SetStat: M72_ENB_IRQ)
+
+    COMP_IRQ defines the Comparator interrupt condition of
+    channel n.
+    (see M72_SetStat: M72_COMP_IRQ)
+
+    CYBW_IRQ defines the Carry/Borrow interrupt condition of
+    channel n.
+    (see M72_SetStat: M72_CYBW_IRQ)
+
+    LBREAK_IRQ enables/disables the Line-Break interrupt of
+    channel n.
+    (see M72_SetStat: M72_LBREAK_IRQ)
+
+    XIN2_IRQ enables/disables the xIN2 Edge interrupt of
+    channel n.
+    (see M72_SetStat: M72_XIN2_IRQ)
+
+    VAL_PRELOAD defines the counter preload value of channel n.
+    (see M72_Write)
+
+    VAL_COMPA/B defines the comparator A/B value of channel n.
+    (see SetStat: M72_VAL_COMPA/B)
+
+    READ_MODE defines the mode of driver read calls of channel n.
+    (see SetStat: M72_READ_MODE)
+
+    READ_TIMEOUT defines a timeout in milliseconds for read calls
+    of channel n, when waiting for a Ready interrupt.
+    (see SetStat: M72_READ_TIMEOUT)
+
+    WRITE_MODE defines the mode of driver write calls of channel n.
+    (see SetStat: M72_WRITE_MODE)
+
+    TIMER_START defines the timer start condition of channel n.
+
+Input:
+    descSpec   pointer to descriptor data
+    osHdl      oss handle
+    ma         hardware access handle
+    devSemHdl  device semaphore handle
+    irqHdl     irq handle
+
+Output:
+    llHdlP     pointer to low-level driver handle
+    return     success (0) or error code
+
+
+Function M72_Exit()
+-------------------
+
+Syntax:
+    static int32 M72_Exit(
+       LL_HANDLE    **llHdlP
+    )
+
+Description:
+    De-initialize hardware and clean up memory
+
+    The function deinitializes all channels by disabling all
+    counters (MODE=0) and all interrupt conditions.
+
+    All pending interrupts are cleared.
+    The cleanup function is called.
+
+Input:
+    llHdlP    pointer to low-level driver handle
+
+Output:
+    return    success (0) or error code
+
+
+Function M72_Read()
+-------------------
+
+Syntax:
+    static int32 M72_Read(
+        LL_HANDLE *llHdl,
+        int32 ch,
+        int32 *value
+    )
+
+Description:
+    Read a value from the device
+
+    Depending on the configured read mode, the following actions
+    may be executed BEFORE the counter latch is read:
+
+    - M72_READ_LATCH
+      nothing
+    - M72_READ_WAIT (1)
+      wait for Ready interrupt or timeout
+    - M72_READ_NOW
+      force counter latch
+
+    (1) NOTE: With read mode M72_READ_WAIT, the IRQEN bit in
+              the Interrupt Control Register should always be
+              enabled.
+
+    Then the function reads the latched counter of the current
+    channel as a 32-bit value.
+
+    See also: Counter latch condition (M72_CNT_STORE setstat) 
+
+Input:
+    llHdl    low-level handle
+    ch       current channel
+
+Output:
+    valueP   read value
+    return   success (0) or error code
+
+
+Function M72_Write()
+--------------------
+
+Syntax:
+    static int32 M72_Write(
+        LL_HANDLE *llHdl,
+        int32 ch,
+        int32 value
+    )
+
+Description:
+    Write a value to the device
+
+    The function loads the counter preload register of the            
+    current channel with a 32-bit value. 
+
+    Depending on the configured write mode, the following actions
+    may be executed AFTER the preload register is written:
+
+    - M72_WRITE_PRELOAD
+      nothing
+    - M72_WRITE_NOW
+      force counter load
+
+    See also: Counter preload condition (M72_CNT_PRELOAD setstat) 
+
+Input:
+    llHdl    low-level handle
+    ch       current channel
+    value    value to write 
+
+Output:
+    return   success (0) or error code
+
+
+Function M72_SetStat()
+----------------------
+
+Syntax:
+    static int32 M72_SetStat(
+        LL_HANDLE *llHdl,
+        int32  code,
+        int32  ch,
+        INT32_OR_64 value32_or_64
+    )
+
+Description:
+    Set the driver status
+
+    The following status codes are supported:
+
+    Code                 Description                Values
+    -------------------  -------------------------  ----------
+    M_LL_DEBUG_LEVEL     driver debug level         see oss.h
+    M_MK_IRQ_ENABLE      interrupt enable           0..1
+    M_LL_IRQ_COUNT       interrupt counter          0..max
+    M_LL_CH_DIR          direction of curr. chan.   M_CH_INOUT
+    -------------------  -------------------------  ----------
+    M72_CNT_MODE         counter mode               0..7,9,10
+    M72_CNT_PRELOAD      counter preload condition  0..3
+    M72_CNT_CLEAR        counter clear   condition  0..3
+    M72_CNT_STORE        counter store   condition  0..2
+    M72_ENB_IRQ          interrupt enable           0..1
+    M72_COMP_IRQ         Comparator   irq condition 0..5
+    M72_CYBW_IRQ         Carry/Borrow irq condition 0..3
+    M72_LBREAK_IRQ       Line-Break   irq enable    0..1
+    M72_XIN2_IRQ         xIN2 Edge    irq enable    0..1
+    M72_INT_STATUS       irq status bits            0..0x1f
+    M72_VAL_COMPA        comparator A value         0..max
+    M72_VAL_COMPB        comparator B value         0..max
+    M72_READ_MODE        mode for read calls        0..2
+    M72_READ_TIMEOUT     timeout for read calls     0..0xffffffff
+    M72_WRITE_MODE       mode for write calls       0, 2    (1)
+    M72_TIMER_START      timer start condition      0..1
+    M72_FREQ_START       start frequency measurem.  -
+    M72_SIGSET_READY     install Ready        sig.  1..max
+    M72_SIGSET_COMP      install Comparator   sig.  1..max
+    M72_SIGSET_CYBW      install Carry/Borrow sig.  1..max
+    M72_SIGSET_LBREAK    install Line-Break   sig.  1..max
+    M72_SIGSET_XIN2      install xIN2 Edge    sig.  1..max 
+    M72_SIGCLR_READY     deinst. Ready        sig.  -
+    M72_SIGCLR_COMP      deinst. Comparator   sig.  -
+    M72_SIGCLR_CYBW      deinst. Carry/Borrow sig.  -
+    M72_SIGCLR_LBREAK    deinst. Line-Break   sig.  -
+    M72_SIGCLR_XIN2      deinst. xIN2 Edge    sig.  - 
+    M72_OUT_MODE         output signal mode           (2)
+    M72_OUT_SET          output signal setting      0..0xf
+    M72_SELFTEST         self-test register      no statements (3)
+    -------------------  -------------------------  ----------
+    Note: for values see also m72_drv.h
+
+    (1) only values 0 and 2 are used for write mode.
+    (2) see description below and m72_drv.h
+    (3) the M72 M-Module supports factory self tests. These tests
+        are controlled through the Self-test Register. 
+        !! THE USER SHOULD NEVER PROGRAM THE SELF-TEST REGISTER !!
+
+    M72_CNT_MODE defines the counter mode of the current channel:
+
+        M72_MODE_NO       0x00    no count (halted)
+        M72_MODE_SINGLE   0x01    single count
+        M72_MODE_1XQUAD   0x02    1x quadrature count
+        M72_MODE_2XQUAD   0x03    2x quadrature count
+        M72_MODE_4XQUAD   0x04    4x quadrature count
+        M72_MODE_FREQ     0x05    frequency measurement
+        M72_MODE_PULSEH   0x06    pulse width high
+        M72_MODE_PULSEL   0x07    pulse width low
+        M72_MODE_PERIOD   0x09    period measurement
+        M72_MODE_TIMER    0x0a    timer mode
+
+    M72_CNT_PRELOAD, defines the counter preload condition,
+    of the current channel, i.e. when the preload value is
+    moved into the counter:
+
+        M72_PRELOAD_NO    0x00    no condition (disabled)
+        M72_PRELOAD_IN2   0x01    at xIN2 rising edge
+        M72_PRELOAD_NOW   0x02    now (immediately)
+        M72_PRELOAD_COMP  0x03    at comparator match
+
+        NOTE: M72_PRELOAD_NOW preloads the counter immediately.
+              Afterwards the previous counter preload condition 
+              is restored.
+
+    M72_CNT_CLEAR defines the counter clear condition 
+    of the current channel, i.e. when the counter value is to
+    be cleared:
+
+        M72_CLEAR_NO      0x00    no condition (disabled)
+        M72_CLEAR_IN2     0x01    at xIN2 rising edge
+        M72_CLEAR_NOW     0x02    now (immediately)
+        M72_CLEAR_COMP    0x03    at comparator match
+
+        NOTE: M72_CLEAR_NOW clears the counter immediately.
+              Afterwards the previous counter clear condition 
+              is restored.
+
+    M72_CNT_STORE defines the counter store condition
+    of the current channel, i.e. when the counter value is to
+    be latched:
+
+        M72_STORE_NO      0x00    no condition (disabled)
+        M72_STORE_NOW     0x01    now (immediately)
+        M72_STORE_IN2     0x02    at xIN2 rising edge
+
+        NOTE: M72_STORE_NOW latches the counter immediately.
+              Afterwards the previous counter store condition 
+              is restored.
+
+    M72_ENB_IRQ enables or disables the ability of the current  
+    channel to generate an interrupt (sets IRQEN for the current 
+    channel in the channel's Interrupt Control Register):
+
+        0 = disable
+        1 = enable
+
+        NOTE: An interrupt is only triggered if IRQEN is set to 1.
+              Disabling also clears the Interrupt Status Shadow 
+              Register for the channel.
+
+    M72_COMP_IRQ defines the comparator interrupt condition
+    of the current channel:
+
+        M72_COMP_NO       0x00    no condition (disabled)
+        M72_COMP_LESS     0x01    if counter < COMPA
+        M72_COMP_GREATER  0x02    if counter > COMPA
+        M72_COMP_EQUAL    0x03    if counter = COMPA
+        M72_COMP_INRANGE  0x04    if COMPA < counter < COMPB
+        M72_COMP_OUTRANGE 0x05    if counter < COMPA or
+                                     counter > COMPB
+
+    M72_CYBW_IRQ defines the carry/borrow interrupt condition
+    of the current channel:
+
+        M72_CYBW_NO       0x00    no condition (disabled)
+        M72_CYBW_CY       0x01    if carry
+        M72_CYBW_BW       0x02    if borrow
+        M72_CYBW_CYBW     0x03    if carry or borrow
+
+    M72_LBREAK_IRQ enables/disables the line-break interrupt
+    of the current channel:
+
+        0 = disable
+        1 = enable
+
+        NOTE: When a line break is detected, the interrupt
+              service routine disables the Line-Break interrupt.
+              (see M72_Irq)
+
+    M72_XIN2_IRQ enables/disables the xIN2 rising edge interrupt 
+    of the current channel:
+
+        0 = disable
+        1 = enable
+
+    M72_INT_STATUS clears the interrupt status flags. 
+    Writing 1 to the respective bit will reset the bit.
+    - If IRQEN is set in the Interrupt Control Register, the
+      bits are cleared in the Interrupt Status Shadow Register.
+    - If IRQEN is not set in the Interrupt Control Register,
+      the bits are cleared in the Interrupt Status Register on 
+      hardware.
+
+        NOTE: When the interrupt status register is polled, events 
+              might not be detected.
+
+    M72_VAL_COMPA/B loads the comparator A/B with a 32-bit value.
+
+    M72_READ_MODE defines the mode for read calls of the current 
+    channel, i.e. additional actions which are executed BEFORE the
+    counter latch is read:
+
+        M72_READ_LATCH    0x00    read latched value
+        M72_READ_WAIT     0x01    wait for Ready irq
+        M72_READ_NOW      0x02    force counter latch
+
+        NOTE: For mode M72_READ_WAIT the interrupt must be enabled 
+              for the respective channel (IRQEN must be set in the
+              Interrupt Control Register).
+
+    M72_READ_TIMEOUT defines a timeout in milliseconds for read
+    calls of the current channel, when waiting for a Ready
+    interrupt.
+
+    M72_WRITE_MODE defines the mode for write calls of the current
+    channel, i.e. additional actions which are executed AFTER the
+    counter preload is written:
+
+        M72_WRITE_PRELOAD 0x00    load preload register
+        M72_WRITE_NOW     0x02    force counter load
+
+    M72_TIMER_START defines the timer start condition of the 
+    current channel (for the timer mode):
+
+        M72_TIMER_IN2     0x00    at xIN2 rising edge
+        M72_TIMER_NOW     0x01    now (immediately)
+
+    M72_FREQ_START starts the frequency measurement of the 
+    current channel (for the frequ. meas. mode) by clearing 
+    the counter and starting the gate timer (10ms).
+    ERR_LL_ILL_PARAM is returned for all other counter modes.
+
+    M72_SIGSET_READY  install Ready              signal    
+    M72_SIGSET_COMP   install Comparator match   signal    
+    M72_SIGSET_CYBW   install Carry/Borrow       signal    
+    M72_SIGSET_LBREAK install Line-Break         signal    
+    M72_SIGSET_XIN2   install xIN2 Edge          signal    
+        M72_SIGSET_xxx installs (activates) a user signal for
+        the current channel.
+        The installed user signal is sent if the corresponding 
+        interrupt condition (see M72_xxx_IRQ) occurs.
+        (See also M72_Irq)
+
+    M72_SIGCLR_READY  deinstall Ready            signal    
+    M72_SIGCLR_COMP   deinstall Comparator match signal    
+    M72_SIGCLR_CYBW   deinstall Carry/Borrow     signal    
+    M72_SIGCLR_LBREAK deinstall Line-Break       signal    
+    M72_SIGCLR_XIN2   deinstall xIN2 Edge        signal    
+        M72_SIGCLR_xxx deinstalls (deactivates) a user signal 
+        for the current channel.
+
+    M72_OUT_MODE defines the output signal mode, i.e. the
+    action of signals Out_1..4, which are influenced by  
+    Carry/Borrow and Compare interrupt events of any channel
+    (see also hardware manual).
+    Use the M72_OUTCFG(out,ch,mode) macro to create control
+    word flags. The flags can be ORed:
+
+        M72_OUTCFG(1,0,mode)  Out_1 action on channel 0
+        M72_OUTCFG(1,1,mode)  Out_1 action on channel 1
+        ...                   ...
+        M72_OUTCFG(4,3,mode)  Out_4 action on channel 3
+
+    Use the following values for 'mode':
+
+        M72_OUT_MODE_NO    0x00   no action on interrupt    
+        M72_OUT_MODE_HIGH  0x01   high signal on interrupt   
+        M72_OUT_MODE_LOW   0x02   low signal on interrupt    
+        M72_OUT_MODE_TOGLE 0x03   toggle signal on interrupt 
+
+    M72_OUT_SET defines the output signal setting flags:
+
+        M72_OUT_SET_CTRL1  0x01   Control_1 signal
+        M72_OUT_SET_CTRL2  0x02   Control_2 signal 
+        M72_OUT_SET_CTRL3  0x04   Control_3 signal 
+        M72_OUT_SET_CTRL4  0x08   Control_4 signal
+
+    Setting a flag sets the corresponding Out_x signal to
+    high, clearing a flag sets the signal to low.
+    To affect several output lines, the flags can be logically
+    combined.
+
+Input:
+    llHdl				low-level handle
+    code				status code
+    ch					current channel
+    value32_or_64       data or
+               pointer to block data structure (M_SG_BLOCK)  (*)
+    (*) = for block status codes
+
+Output:
+    return     success (0) or error code
+
+
+Function M72_GetStat()
+----------------------
+
+Syntax:
+    static int32 M72_GetStat(
+        LL_HANDLE *llHdl,
+        int32  code,
+        int32  ch,
+        INT32_OR_64  *value32_or_64P
+    )
+
+Description:
+    Get the driver status
+
+    The following status codes are supported:
+
+    Code                 Description                Values
+    -------------------  -------------------------  ----------
+    M_LL_DEBUG_LEVEL     driver debug level         see oss.h
+    M_LL_CH_NUMBER       number of channels         4
+    M_LL_CH_DIR          direction of curr. chan.   M_CH_INOUT
+    M_LL_CH_LEN          length of curr. ch. [bits] 32
+    M_LL_CH_TYP          description of curr. ch.   M_CH_COUNTER
+    M_LL_IRQ_COUNT       interrupt counter          0..max
+    M_LL_ID_CHECK        EEPROM is checked          0..1
+    M_LL_ID_SIZE         EEPROM size [bytes]        128
+    M_LL_BLK_ID_DATA     EEPROM raw data            -
+    M_MK_BLK_REV_ID      ident function table ptr   -
+    -------------------  -------------------------  ----------
+    M72_CNT_MODE         counter mode               0..7,9,10
+    M72_CNT_PRELOAD      counter preload condition  0..3
+    M72_CNT_CLEAR        counter clear   condition  0..3
+    M72_CNT_STORE        counter store   condition  0..2
+    M72_ENB_IRQ          irq enable                 0..1
+    M72_COMP_IRQ         Comparator   irq condition 0..5
+    M72_CYBW_IRQ         Carry/Borrow irq condition 0..3
+    M72_LBREAK_IRQ       Line-Break   irq enable    0..1
+    M72_XIN2_IRQ         xIN2 Edge    irq enable    0..1
+    M72_INT_STATUS       irq status bits            0..0x1f
+    M72_VAL_COMPA        comparator A value         0..max
+    M72_VAL_COMPB        comparator B value         0..max
+    M72_READ_MODE        mode for read calls        0..2
+    M72_READ_TIMEOUT     timeout for read calls     0..0xffffffff
+    M72_WRITE_MODE       mode for write calls       0, 2    (1)
+    M72_TIMER_START      timer start condition      0..1
+    M72_SIGSET_READY     Ready        signal        0..max
+    M72_SIGSET_COMP      Comparator   signal        0..max
+    M72_SIGSET_CYBW      Carry/Borrow signal        0..max
+    M72_SIGSET_LBREAK    Line-Break   signal        0..max
+    M72_SIGSET_XIN2      xIN2 Edge    signal        0..max 
+    M72_OUT_MODE         output signal mode           (2)
+    M72_OUT_SET          output signal setting      0..0xf
+    M72_SELFTEST         self-test register      no statements (3)
+    -------------------  -------------------------  ----------
+    Note: For values see also m72_drv.h.
+
+    (1) only values 0 and 2 are used for write mode.
+    (2) see description below and m72_drv.h
+    (3) The M72 module supports factory self tests. These test are
+        controlled through the Self-test Register. 
+        !! THE USER SHOULD NEVER PROGRAM THE SELF-TEST REGISTER !!
+
+    M72_CNT_MODE returns the counter mode of the current channel.
+
+    M72_CNT_PRELOAD, M72_CNT_CLEAR and M72_CNT_STORE return the
+    counter preload/clear/store condition of the current channel.
+
+    M72_ENB_IRQ returns the interrupt enable condition 
+    of the current channel.
+
+    M72_COMP_IRQ returns the Comparator interrupt condition
+    of the current channel.
+
+    M72_CYBW_IRQ returns the Carry/Borrow interrupt condition
+    of the current channel.
+
+    M72_LBREAK_IRQ returns if the Line-Break interrupt
+    of the current channel is enabled/disabled.
+
+    M72_XIN2_IRQ returns if the xIN2 rising edge interrupt 
+    of the current channel is enabled/disabled.
+
+    M72_INT_STATUS returns the interrupt status flags.
+    - If IRQEN is set in the Interrupt Control Register, the
+      bits are read from the Interrupt Status Shadow Register,
+      which is updated (ORed) in the interrupt service routine.
+    - If IRQEN is not set in the Interrupt Control Register,
+      the bits are read from the Interrupt Status Register on 
+      hardware.
+
+        NOTE: When the interrupt status register is polled, events 
+              might not be detected.
+
+    M72_VAL_COMPA/B returns the comparator A/B 32-bit value.
+
+    M72_READ_MODE returns the read mode of the current channel.
+
+    M72_READ_TIMEOUT returns the timeout in milliseconds for read
+    calls of the current channel, when waiting for a measurement 
+    ready interrupt.
+
+    M72_WRITE_MODE returns the write mode of the current channel.
+
+    M72_SIGSET_xxx returns the signal code of an installed
+    signal for the current channel. Zero is returned if no 
+    signal is installed.
+
+    M72_OUT_MODE returns the output signal mode.
+
+    M72_OUT_SET returns the current state of the output signals.
+
+    (See corresponding codes at M72_SetStat for details)
+
+Input:
+    llHdl			low-level handle
+    code			status code
+    ch				current channel
+    value32_or_64P  pointer to block data structure (M_SG_BLOCK)  (*) 
+    (*) = for block status codes
+
+Output:
+    value32_or_64P		data pointer or
+						pointer to block data structure (M_SG_BLOCK)  (*) 
+    return				success (0) or error code
+    (*) = for block status codes
+
+
+Function M72_BlockRead()
+------------------------
+
+Syntax:
+    static int32 M72_BlockRead(
+         LL_HANDLE *llHdl,
+         int32     ch,
+         void      *buf,
+         int32     size,
+         int32     *nbrRdBytesP
+    )
+
+Description:
+    Read a data block from the device
+
+    The function is not supported and always returns an
+    ERR_LL_READ error.
+
+Input:
+    llHdl        low-level handle
+    ch           current channel
+    buf          data buffer
+    size         data buffer size
+
+Output:
+    nbrRdBytesP  number of read bytes
+    return       success (0) or error code
+
+
+Function M72_BlockWrite()
+-------------------------
+
+Syntax:
+    static int32 M72_BlockWrite(
+         LL_HANDLE *llHdl,
+         int32     ch,
+         void      *buf,
+         int32     size,
+         int32     *nbrWrBytesP
+    )
+
+Description:
+    Write a data block to the device
+
+    The function is not supported and always returns an
+    ERR_LL_WRITE error.
+
+Input:
+    llHdl        low-level handle
+    ch           current channel
+    buf          data buffer
+    size         data buffer size
+
+Output:
+    nbrWrBytesP  number of written bytes
+    return       success (0) or error code
+
+
+Function M72_Irq()
+------------------
+
+Syntax:
+    static int32 M72_Irq(
+       LL_HANDLE *llHdl
+    )
+
+Description:
+    Interrupt service routine
+
+    The interrupt is triggered when the channel interrupt 
+    (IRQEN) is enabled.
+    Depending on the configuration in the Interrupt Control
+    Registers, one of the following interrupts will occur:
+    - Ready
+      (cannot be configured in the Interrupt Control Registers,
+      see hardware manual)
+    - Comparator
+    - Carry/Borrow
+    - xIN2 Edge
+    - Line-Break
+      When a line break was detected, the interrupt service
+      routine disables the Line-Break interrupt 
+      for the respective channel.
+      Line-break detection must be explicitly enabled via
+      M72_SetStat (M72_LBREAK_IRQ).
+
+    If IRQEN is set in the Interrupt Control Register:
+      The shadow registers are updated (ORed with current 
+      Interrupt Status Register information).
+      The pending flags of the Interrupt Status Registers are
+      cleared. The function sends the correponding user signals
+      if installed and releases a read semaphore when needed.
+
+    If IRQEN is not set in the Interrupt Control Register:
+      The bits in the Interrupt Status Registers are ignored.
+      Shadow registers for Interrupt Status Registers are set
+      to zero.
+
+Input:
+    llHdl    low-level handle
+
+Output:
+    return   LL_IRQ_DEVICE    irq caused by device
+             LL_IRQ_DEV_NOT   irq not caused by device
+             LL_IRQ_UNKNOWN   unknown
+
+
+Function M72_Info()
+-------------------
+
+Syntax:
+    static int32 M72_Info(
+       int32  infoType,
+       ...
+    )
+
+Description:
+    Get information about hardware and driver requirements.
+
+    The following info codes are supported:
+
+    Code                      Description
+    ------------------------  -----------------------------
+    LL_INFO_HW_CHARACTER      hardware characteristics
+    LL_INFO_ADDRSPACE_COUNT   nr of required address spaces
+    LL_INFO_ADDRSPACE         address space information
+    LL_INFO_IRQ               interrupt required
+    LL_INFO_LOCKMODE          process lock mode required
+
+    The LL_INFO_HW_CHARACTER code returns all address and 
+    data modes (ORed) which are supported by the hardware
+    (MDIS_MAxx, MDIS_MDxx).
+
+    The LL_INFO_ADDRSPACE_COUNT code returns the number
+    of address spaces used by the driver.
+
+    The LL_INFO_ADDRSPACE code returns information about one
+    specific address space (MDIS_MAxx, MDIS_MDxx). The returned 
+    data mode represents the widest hardware access used by 
+    the driver.
+
+    The LL_INFO_IRQ code returns whether the driver supports an
+    interrupt routine (TRUE or FALSE).
+
+    The LL_INFO_LOCKMODE code returns which process locking
+    mode the driver needs (LL_LOCK_xxx).
+
+Input:
+    infoType     info code
+    ...          argument(s)
+
+Output:
+    return       success (0) or error code
+
