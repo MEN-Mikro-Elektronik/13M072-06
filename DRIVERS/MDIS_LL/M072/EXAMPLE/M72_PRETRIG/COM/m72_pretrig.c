@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
 	u_int32 nKeypressCount = 0;   /* test Pretrigger Generation Gating */
 	char *device,*str;
 
-	printf("Pretrigger test simulator %s %s\n", __DATE__, __TIME__ );
+	printf("Pretrigger test simulator\n");
 
 	if (argc < 3 || strcmp(argv[1],"-?")==0) {
 		usage();

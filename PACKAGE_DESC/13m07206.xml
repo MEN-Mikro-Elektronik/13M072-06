@@ -3,8 +3,8 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="packagedesc.xsd">
 	<name>13m07206</name>
 	<description>MDIS5 driver package for MEN M72 M-Module</description>
-	<date>2010-04-20</date>
-	<revision>3.1</revision>
+	<date>2015-07-23</date>
+	<revision>3.2</revision>
 	<docroot>DRIVERS/MDIS_LL/M072/DOC/main.html</docroot>
 	   <modellist>
   	     <model>
