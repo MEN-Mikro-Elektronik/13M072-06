@@ -33,3 +33,4 @@ MAK_INCL=$(MEN_INC_DIR)/m72_drv.h     \
 MAK_INP1=m72_pretrig$(INP_SUFFIX)
 
 MAK_INP=$(MAK_INP1)
+ 

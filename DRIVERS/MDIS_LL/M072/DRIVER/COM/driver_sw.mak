@@ -66,3 +66,4 @@ MAK_INP2=m72_pld$(INP_SUFFIX)
 
 MAK_INP=$(MAK_INP1) \
         $(MAK_INP2)
+ 
