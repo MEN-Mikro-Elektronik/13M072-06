@@ -1842,7 +1842,7 @@ static int32 M72_GetStat(
 )
 {
     int32       *valueP     = (int32*)value32_or_64P; /* pointer to 32 bit value */
-    /* INT32_OR_64 *value64P   = value32_or_64P;         stores 32/64bit pointer */
+    INT32_OR_64 *value64P   = value32_or_64P;         /* stores 32/64bit pointer */
 	M_SG_BLOCK  *blk        = (M_SG_BLOCK*)value32_or_64P;
     int32 dummy;
 	int32 error = ERR_SUCCESS;
@@ -1926,7 +1926,7 @@ static int32 M72_GetStat(
         |   (treat as non-block!)   |
         +--------------------------*/
         case M_MK_BLK_REV_ID:
-           *valueP = (int32)&llHdl->idFuncTbl;
+           *value64P = (INT32_OR_64)&llHdl->idFuncTbl;
            break;
         /*--------------------------+
         |   counter mode            |
