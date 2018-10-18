@@ -114,7 +114,9 @@ static void usage(void)
 int main(int argc, char *argv[])
 {
 	MDIS_PATH path=0;
+#if 0
 	int32 chan, meth;
+#endif
 	u_int32 bPreEnable = 1, automode = 0;
 	u_int32 valPreload = 0;
 	u_int32 nKeypressCount = 0;   /* test Pretrigger Generation Gating */
@@ -134,8 +136,10 @@ int main(int argc, char *argv[])
 		printf("Automatic en/disabling\n");
 
 	device 	= argv[1];
+#if 0
 	chan 	= 0;
 	meth 	= atoi(argv[2]);
+#endif
 
 	/*--------------------+
 	 |  open path         |
