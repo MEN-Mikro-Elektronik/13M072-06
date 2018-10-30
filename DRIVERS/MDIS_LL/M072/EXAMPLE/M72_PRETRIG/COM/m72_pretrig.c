@@ -13,38 +13,23 @@
  *     Required: MDIS user interface library
  *     Switches: NO_MAIN_FUNC	(for systems with one namespace)
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: m72_pretrig.c,v $
- * Revision 1.7  2010/04/20 15:04:21  amorbach
- * R:1. Porting to MDIS5
- * 2. Warning: Unnecessary export of symbol usage
- * M:1. changed according to MDIS Porting Guide 0.8
- * 2. usage() changed to static
- *
- * Revision 1.6  2008/02/26 17:09:59  ts
- * added automatic option to continously en/disable pretriggering
- * complete initialization is done in driver by Setstat EN_PRETRIG
- *
- * Revision 1.5  2007/07/31 17:29:52  ts
- * works with direct clockcounting between 2 xIN2+ edges
- *
- * Revision 1.4  2007/07/31 11:34:15  ts
- * Added Tests for simultanoeous clear/restart of TimerA
- *
- * Revision 1.3  2007/05/24 17:54:08  ts
- * Cosmetics, CHK Macro
- *
- * Revision 1.2  2006/09/27 18:55:37  ts
- * changed return type of main() to int due to Compiler warnings
- *
- * Revision 1.1  2006/06/30 19:00:13  ts
- * Initial Revision
- *
- *
  *---------------------------------------------------------------------------
  * (c) Copyright 2010 by MEN mikro elektronik GmbH, Nuernberg, Germany 
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
  
 #include <stdio.h>
 #include <stdlib.h>

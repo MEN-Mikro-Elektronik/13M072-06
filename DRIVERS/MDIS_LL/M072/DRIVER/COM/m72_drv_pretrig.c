@@ -36,36 +36,23 @@
  *     Required: OSS, DESC, PLD, ID, DBG libraries
  *     Switches: _ONE_NAMESPACE_PER_DRIVER_
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: m72_drv_pretrig.c,v $
- * Revision 1.6  2010/04/20 15:10:39  amorbach
- * R.1: Porting to MDIS5
- *   2: MDVE test failed
- * M.1: Changed according to MDIS Porting Guide 0.8
- *   2: M72_PldIdent, M72_PldData renamed to __M72_PldIdent, __M72_PldData to enable variant specific substitution
- *
- * Revision 1.5  2008/02/26 17:23:21  ts
- * driver now based on completely reworked FPGA content that fixes several bugs
- * TimerA simultaneously latched/cleared to enable continous period measurement
- * Interrupt enabled with SetStat EN_PRETRIG only
- *
- * Revision 1.4  2007/07/31 17:32:14  ts
- * works with direct CLK-counting between 2 edges (see m72_pretrig.c)
- * cosmetics
- *
- * Revision 1.3  2007/05/24 18:31:30  ts
- * Bugfix: dont return Error when M_MK_IRQ_ENABLE is called
- *
- * Revision 1.2  2006/09/26 18:48:39  ts
- * use PLD file Version depending on Variant
- *
- * Revision 1.1  2006/09/26 18:44:12  ts
- * Initial Revision
- *
  *---------------------------------------------------------------------------
  * (c) Copyright 2010 by MEN Mikro Elektronik GmbH, Nuernberg, Germany
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #define _NO_LL_HANDLE		/* ll_defs.h: don't define LL_HANDLE struct */
 

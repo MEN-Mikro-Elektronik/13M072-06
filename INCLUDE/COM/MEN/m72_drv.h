@@ -13,50 +13,23 @@
  *     Switches: _ONE_NAMESPACE_PER_DRIVER_
  *               _LL_DRV_
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: m72_drv.h,v $
- * Revision 2.7  2010/04/20 15:11:07  amorbach
- * R: driver ported to MDIS5, new MDIS_API and men_typs
- * M: for backward compatibility to MDIS4 optionally define new types
- *
- * Revision 2.6  2007/05/25 11:58:36  ts
- * + SetStat EN_PRETRIG
- *
- * Revision 2.5  2006/09/18 11:04:37  ts
- * Set SetStat code CNT_PRETRIG to the correct next free Value
- *
- * Revision 2.4  2006/07/01 10:57:59  ts
- * + Setstat M72_CNT_PRETRIG (intermediate checkin)
- *
- * Revision 2.3  2002/03/19 10:54:22  Schoberl
- * cosmetics, support for swapped variant
- *
- * Revision 2.2  1999/08/06 09:19:33  Schoberl
- * cosmetics
- * fixed:
- * - M72 output signal mode macro
- * added:
- * - declarations for ll-functions
- * - variant for swapped access possible
- * - M72_READ_TIMEOUT
- * - M72_SIGSET_XIN2
- * - M72_SIGCLR_XIN2
- * - M72_INT_STATUS
- * removed:
- * - now needless read/write flags
- * - defines for counter mode 8
- * changed:
- * - M72_OUTCFG macro
- * - read mode flags not ORed anymore
- * - write mode flags not ORed anymore
- *
- * Revision 2.1  1998/10/23 16:31:59  see
- * Added by mcvs
- *
  *---------------------------------------------------------------------------
  * (c) Copyright 2010 by MEN mikro elektronik GmbH, Nuernberg, Germany
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef _M72_DRV_H
 #define _M72_DRV_H

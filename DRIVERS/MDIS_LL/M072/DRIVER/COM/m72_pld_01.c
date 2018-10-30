@@ -12,30 +12,24 @@
  *
  *     \switches 
  */
- /*-------------------------------[ History ]--------------------------------
- *
- * $Log: m72_pld_01.c,v $
- * Revision 1.5  2010/04/20 15:07:15  amorbach
- * R: MDVE test failed
- * M: M72_PldIdent, M72_PldData renamed to __M72_PldIdent, __M72_PldData to enable variant specific substitution
- *
- * Revision 1.4  2008/02/26 17:14:09  ts
- * use reworked MM-IF FPGA content that solved several timing problems
- * added detailled ID String to deliver exact driver and TTF File information
- *
- * Revision 1.3  2008/01/14 13:55:39  ts
- * cosmetics, contains more thorough comment explaining PLDs special
- * functionality
- *
- * Revision 1.2  2007/05/24 18:30:23  ts
- * Testversion with Bugfix for D201 MM-IF Address error
- *
- * Revision 1.1  2006/09/26 13:47:51  ts
- * Initial Revision, Standard PLD Variant
- *
+ /*
  *---------------------------------------------------------------------------
  * (c) Copyright 2006 by MEN Mikro Elektronik GmbH, Nuremberg, Germany
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include <MEN/men_typs.h>   /* system dependend definitions   */
 #include "m72_pld.h"		/* local prototypes */

@@ -18,51 +18,23 @@
  *     Required: usr_oss.l usr_utl.l
  *     Switches: -
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: m72_count.c,v $
- * Revision 1.9  2010/04/20 15:04:42  amorbach
- * R: Porting to MDIS5
- * M: changed according to MDIS Porting Guide 0.8
- *
- * Revision 1.8  2006/09/27 18:58:11  ts
- * changed return type of main() to int
- *
- * Revision 1.7  2004/08/30 12:19:15  dpfeuffer
- * minor modifications for MDIS4/2004 conformity
- *
- * Revision 1.6  1999/08/06 15:07:26  Franke
- * cosmetics
- *
- * Revision 1.5  1999/08/06 10:30:08  Schoberl
- * added headers stdlib.h, string.h
- *
- * Revision 1.4  1999/08/06 09:19:11  Schoberl
- * cosmetics
- * functions static
- * adapted to current driver
- * added:
- * - count mode 6,7,9: counter preload in loop mode
- * - signal for XIN2
- * - interrupt per channel
- * removed:
- * - recursive abort when error occures while disabling interrupt
- *
- * Revision 1.3  1998/11/02 17:10:37  see
- * casts added
- * V1.1
- *
- * Revision 1.2  1998/10/30 15:25:30  Schmidt
- * ReadySig, CompSig, CybwSig, LbreakSig are now u_int32
- * SetGetStat(): maxInfo now int32
- * main(): access to returned NULL-ptr. from UTL_TSTOPT() prevented
- *
- * Revision 1.1  1998/10/23 16:31:10  see
- * Added by mcvs
- *
  *---------------------------------------------------------------------------
  * (c) Copyright 1999 by MEN mikro elektronik GmbH, Nuernberg, Germany 
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
  
 static const char RCSid[]="$Id: m72_count.c,v 1.9 2010/04/20 15:04:42 amorbach Exp $";
 

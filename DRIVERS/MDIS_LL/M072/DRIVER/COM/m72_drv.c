@@ -36,80 +36,23 @@
  *     Required: OSS, DESC, PLD, ID, DBG libraries
  *     Switches: _ONE_NAMESPACE_PER_DRIVER_
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: m72_drv.c,v $
- * Revision 1.12  2010/04/20 15:10:03  amorbach
- * R.1: Porting to MDIS5
- *   2: MDVE test failed
- * M.1: Changed according to MDIS Porting Guide 0.8
- *   2: M72_PldIdent, M72_PldData renamed to __M72_PldIdent, __M72_PldData to enable variant specific substitution
- *
- * Revision 1.11  2006/09/26 18:43:29  ts
- * Revert driver to previous Revision. Keep pretrigger as extra Variant
- *
- * Revision 1.10  2006/07/01 10:52:37  ts
- * intermed. checkin for Pretrigger support test
- *
- * Revision 1.9  2004/08/30 12:18:54  dpfeuffer
- * - OSS_IrqMask/OSS_IrqUnMask replaced with OSS_IrqMaskR/OSS_IrqRestore
- * - minor modifications for MDIS4/2004 conformity
- *
- * Revision 1.8  2002/03/19 10:54:08  Schoberl
- * cosmetics; swapped access variant support
- *
- * Revision 1.7  1999/08/06 15:18:06  Franke
- * cosmetics
- *
- * Revision 1.6  1999/08/06 09:45:01  kp
- * removed C++ comment
- *
- * Revision 1.5  1999/08/06 09:18:40  Schoberl
- * ll-functions static now
- * added:
- * - declarations for low-level functions
- * - variant for swapped access possible
- * - register and bit definitions
- * - interrupt per channel handling (new bit IRQEnb in interrupt control
- * registers)
- * - signal for xIN2 Edge interrupt
- * - OSS_SemWait uses now timeout value write access
- * - IRQs are now counted in ISR
- * - ISR can distinguish Ready and xIN2 Edge int.,
- * - xIN2 Edge int available in all counter modes
- * - access to Interrupt Status Register
- * - casts
- * - GetStat: M_LL_ID_SIZE and M_LL_BLK_ID_DATA can be used
- * removed:
- * - help flag readAvail
- * - write semaphore
- * - write mode 1,3
- * - read mode 3
- * - counter mode 8
- * changed:
- * - SetStat: M_MK_IRQ_COUNT to M_LL_IRQ_COUNT
- * 		- Init: output setting before output mode setting
- * - read mode flags not ORed anymore
- * - write mode flags not ORed anymore
- *
- * Revision 1.4  1999/03/15 16:06:05  Schmidt
- * M72_Init() : descriptor entry CHANNEL_n/READ_TIMEOUT added
- * M72_Read() : OSS_SemWait now uses timeout value
- * M72_SetStat(), M72_GetStat() : M72_READ_TIMEOUT added
- *
- * Revision 1.3  1998/11/02 16:33:46  see
- * Prototypes of m72_pld.c are now included from m72_pld.h
- *
- * Revision 1.2  1998/10/30 15:19:29  Schmidt
- * M72_Write()   : unreferenced local variable 'ctrl' removed
- * M72_SetStat(), M72_Init() : variables casted
- *
- * Revision 1.1  1998/10/23 16:30:47  see
- * Added by mcvs
- *
  *---------------------------------------------------------------------------
  * (c) Copyright 2010 by MEN Mikro Elektronik GmbH, Nuernberg, Germany
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #define _NO_LL_HANDLE		/* ll_defs.h: don't define LL_HANDLE struct */
 

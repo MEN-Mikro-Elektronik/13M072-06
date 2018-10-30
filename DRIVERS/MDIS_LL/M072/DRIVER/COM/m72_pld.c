@@ -11,54 +11,24 @@
  *
  *     \switches
  */
- /*-------------------------------[ History ]--------------------------------
- *
- *
- * $Log: m72_pld.c,v $
- * Revision 2.1  2010/04/20 15:07:35  amorbach
- * R: MDVE test failed
- * M: M72_PldIdent, M72_PldData renamed to __M72_PldIdent, __M72_PldData to enable variant specific substitution
- *
- * Revision 2.0  2008/02/25 18:31:05  ts
- * bugfix: FPGA content (m72_ttf) mostly reworked, fixes several bugs in MM-IF
- *         and functional design
- * cosmetics: complete file history added again
- *
- * Revision 1.9  2006/10/04 13:54:31  ts
- * Standard Variant with FPGA bugfixes
- *
- * Revision 1.8  2006/07/01  0:51:44 by ts
- * intermed. checkin for Pretrigger support test
- *
- * Revision 1.7  2004/10/11 16:31:55 by dpfeuffer
- * PLD data changed:
- * Problem: Output control register 1 and output control register 2 cannot
- * be distinguished.
- * Solution: M-Modul interface has been changed. Both register may
- * be accessed now.
- *
- * Revision 1.6  2002/08/29 13:24:47 by LSchoberl
- * new pld data
- *
- * Revision 1.5  1999/08/06 09:18:50 by Schoberl
- * new pld data
- *
- * Revision 1.4  1998/11/02 16:33:58 by see
- * now including prototypes from m72_pld.h
- * char* assignment removed
- *
- * Revision 1.3  1998/10/30 15:20:10 by Schmidt
- * M72_PldData type changed
- *
- * Revision 1.2  1998/10/30 09:56:36 by see
- * new PLD revision (buserror bugfix)
- *
- * Revision 1.1  1998/10/23 16:30:53 by see
- * Added by mcvs
- *
+ /*
  *---------------------------------------------------------------------------
  * (c) Copyright 2006 by MEN Mikro Elektronik GmbH, Nuremberg, Germany
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include <MEN/men_typs.h>   /* system dependend definitions   */
 #include "m72_pld.h"		/* local prototypes */

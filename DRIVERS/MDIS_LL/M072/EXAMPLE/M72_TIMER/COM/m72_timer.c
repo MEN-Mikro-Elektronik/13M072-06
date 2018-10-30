@@ -26,44 +26,23 @@
  *     Required: MDIS user interface library
  *     Switches: NO_MAIN_FUNC	(for systems with one namespace)
  *
- *-------------------------------[ History ]---------------------------------
- *
- * $Log: m72_timer.c,v $
- * Revision 1.8  2010/04/20 15:04:37  amorbach
- * R: Porting to MDIS5
- * M: changed according to MDIS Porting Guide 0.8
- *
- * Revision 1.7  2006/09/27 18:55:58  ts
- * changed return type of main() to int due to Compiler warnings
- *
- * Revision 1.6  2004/08/30 12:19:46  dpfeuffer
- * minor modifications for MDIS4/2004 conformity
- *
- * Revision 1.5  1999/08/06 15:07:22  Franke
- * cosmetics
- *
- * Revision 1.4  1999/08/06 10:30:28  Schoberl
- * added headers stdlib.h, string.h
- *
- * Revision 1.3  1999/08/06 09:19:29  Schoberl
- * cosmetics
- * functions static
- * main directly called in all systems now
- * added:
- * - setstat for IRQ enable per channel
- * - deinstall comparator signal if installed
- * removed:
- * - printf in SigHandler
- *
- * Revision 1.2  1998/10/30 15:22:11  Schmidt
- * m72_timer : unreferenced local variable 't1' and 't2' removed
- *
- * Revision 1.1  1998/10/23 16:31:47  see
- * Added by mcvs
- *
  *---------------------------------------------------------------------------
  * (c) Copyright 2010 by MEN mikro elektronik GmbH, Nuernberg, Germany 
  ****************************************************************************/
+/*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
  
 #include <stdio.h>
 #include <stdlib.h>
