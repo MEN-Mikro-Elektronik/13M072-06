@@ -6,29 +6,21 @@
 #
 #    Description: Makefile definitions for the M72 driver
 #
-#---------------------------------[ History ]---------------------------------
-#
-#   $Log: driver_sw.mak,v $
-#   Revision 1.5  2010/04/20 15:01:10  amorbach
-#   R: MDVE test failed
-#   M: MAK_SWITCH corrected
-#
-#   Revision 1.4  2006/10/04 12:12:07  ts
-#   changed Standard PLD File back to m72_pld.c
-#
-#   Revision 1.3  2006/09/27 17:40:31  ts
-#   use PLD file Version depending on Variant
-#
-#   Revision 1.2  2004/08/30 12:19:06  dpfeuffer
-#   minor modifications for MDIS4/2004 conformity
-#
-#   Revision 1.1  2002/03/19 10:54:17  Schoberl
-#   Initial Revision
-#
-#   initial revision (cloned from driver.mak ref 1.3)
 #-----------------------------------------------------------------------------
-#   (c) Copyright 2002 by MEN mikro elektronik GmbH, Nuernberg, Germany
+#   Copyright (c) 2002-2019, MEN Mikro Elektronik GmbH
 #*****************************************************************************
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 MAK_NAME=m72_sw
 
