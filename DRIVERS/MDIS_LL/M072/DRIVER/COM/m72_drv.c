@@ -2137,7 +2137,7 @@ static int32 M72_Irq(
 	if (irq_state == 0)
 		return(LL_IRQ_DEV_NOT);		/* say: not caused by device */
 
-#if DBG
+#ifdef DBG
 	/* print pending flags */
 	for (n=0; n<CH_NUMBER; n++) {
 		if (llHdl->enbIrq[n]) {

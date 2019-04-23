@@ -2306,7 +2306,7 @@ static int32 M72_Irq(
 	MWRITE_D16(llHdl->ma, PRELOAD_HIGH_REG(PRETR_TIMER_C),
 			   (u_int16)(preloadC >> 16));
 
-#if DBG
+#ifdef DBG
 	/* print pending flags */
 	for (n=0; n < CH_NUMBER; n++) {
 		if (llHdl->enbIrq[n]) {
