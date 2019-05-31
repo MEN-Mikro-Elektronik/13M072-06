@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: see
- *        $Date: 2010/04/20 15:04:42 $
- *    $Revision: 1.9 $
  *
  *  Description: Configure and read M72 counter channel
  *
@@ -36,7 +34,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
  
-static const char RCSid[]="$Id: m72_count.c,v 1.9 2010/04/20 15:04:42 amorbach Exp $";
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -47,6 +44,8 @@ static const char RCSid[]="$Id: m72_count.c,v 1.9 2010/04/20 15:04:42 amorbach E
 #include <MEN/usr_utl.h>
 #include <MEN/mdis_api.h>
 #include <MEN/m72_drv.h>
+
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
 
 /*--------------------------------------+
 |   DEFINES                             |
@@ -239,7 +238,7 @@ static void usage(int32 moreHelp)
 	printf("    -h           print detailed values for all options  \n");
 	printf("    -<opt>=?     print detailed values for option <opt> \n");
 	printf("    -?           print this help\n");
-	printf("(c) 1999 by MEN mikro elektronik GmbH, %s\n\n", RCSid );
+	printf("Copyright (c) 1999-2019, MEN Mikro Elektronik GmbH%s\n\n", IdentString );
 }
 
 /********************************* main *************************************

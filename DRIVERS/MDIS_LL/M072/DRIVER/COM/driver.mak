@@ -1,8 +1,6 @@
 #***************************  M a k e f i l e  *******************************
 #
 #         Author: see
-#          $Date: 2010/04/20 14:59:59 $
-#      $Revision: 1.8 $
 #
 #    Description: Makefile definitions for the M72 driver
 #
@@ -23,8 +21,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 MAK_NAME=m72
+# the next line is updated during the MDIS installation
+STAMPED_REVISION="13M072-06_03_05-3-g9a820db-dirty_2019-05-10"
+
+DEF_REVISION=MAK_REVISION=$(STAMPED_REVISION)
 
 MAK_SWITCH=$(SW_PREFIX)MAC_MEM_MAPPED \
+		$(SW_PREFIX)$(DEF_REVISION) \
 		$(SW_PREFIX)M72_VARIANT=M72
 
 MAK_LIBS=$(LIB_PREFIX)$(MEN_LIB_DIR)/desc$(LIB_SUFFIX)     \

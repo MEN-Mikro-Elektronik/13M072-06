@@ -1,8 +1,6 @@
 #***************************  M a k e f i l e  *******************************
 #
 #         Author: see/ts
-#          $Date: 2010/04/20 15:00:48 $
-#      $Revision: 1.2 $
 #
 #    Description: Makefile definitions for the M72 driver with pretrigger
 #                 Capability
@@ -24,8 +22,13 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 MAK_NAME=m72_pre
+# the next line is updated during the MDIS installation
+STAMPED_REVISION="13M072-06_03_05-3-g9a820db-dirty_2019-05-10"
+
+DEF_REVISION=MAK_REVISION=$(STAMPED_REVISION)
 
 MAK_SWITCH=$(SW_PREFIX)MAC_MEM_MAPPED \
+		$(SW_PREFIX)$(DEF_REVISION) \
 		$(SW_PREFIX)M72_VARIANT=M72_PRE
 
 MAK_LIBS=$(LIB_PREFIX)$(MEN_LIB_DIR)/desc$(LIB_SUFFIX)     \

@@ -3,8 +3,6 @@
  *        \file  m72_pld_00.c
  *
  *      \author  ts
- *        $Date: 2010/04/20 15:07:35 $
- *    $Revision: 2.1 $
  *
  *      \brief   PLD data array for M72 Standard(00) driver Variant
  *

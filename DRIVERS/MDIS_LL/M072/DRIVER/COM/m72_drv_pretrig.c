@@ -1,11 +1,9 @@
 /*********************  P r o g r a m  -  M o d u l e ***********************
  *
  *         Name: m72_drv.c
- *      Project: M72 module driver (MDIS V4.x)
+ *      Project: M72 module driver 
  *
  *       Author: see
- *        $Date: 2010/04/20 15:10:39 $
- *    $Revision: 1.6 $
  *
  *  Description: Low-level driver for M72 M-Modules
  *

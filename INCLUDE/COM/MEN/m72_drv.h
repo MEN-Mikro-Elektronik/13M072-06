@@ -3,8 +3,6 @@
  *         Name: m72_drv.h
  *
  *       Author: see
- *        $Date: 2010/04/20 15:11:07 $
- *    $Revision: 2.7 $
  *
  *  Description: Header file for M72 driver
  *               - M72 specific status codes

@@ -3,8 +3,6 @@
  *         Name: m72_pld.h
  *
  *       Author: see
- *        $Date: 2010/04/20 15:08:20 $
- *    $Revision: 1.3 $
  * 
  *  Description: Prototypes for PLD data array and ident function
  *                      

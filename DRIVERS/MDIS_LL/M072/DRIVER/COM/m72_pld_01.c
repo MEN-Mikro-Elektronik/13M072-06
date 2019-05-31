@@ -3,8 +3,6 @@
  *        \file  m72_pld_01.c
  *
  *      \author  ts
- *        $Date: 2010/04/20 15:07:15 $
- *    $Revision: 1.5 $
  *
  *      \brief   PLD data array for M72 Pretrigger driver Variant -01 which
  *               has Trigger Signals OUT_4 and AIN2+ also routed to MM IF

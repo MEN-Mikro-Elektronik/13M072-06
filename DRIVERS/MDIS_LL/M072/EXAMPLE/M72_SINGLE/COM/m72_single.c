@@ -5,8 +5,6 @@
  ****************************************************************************
  *  
  *       Author: see
- *        $Date: 2010/04/20 15:04:31 $
- *    $Revision: 1.7 $
  *
  *  Description: M72 example for single count mode
  *
