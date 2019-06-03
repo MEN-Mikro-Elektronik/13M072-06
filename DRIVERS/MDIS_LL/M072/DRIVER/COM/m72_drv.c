@@ -193,6 +193,8 @@ typedef struct {
 #include <MEN/ll_entry.h>   /* low-level driver jumptable  */
 #include <MEN/m72_drv.h>   /* M72 driver header file */
 
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
+
 /*-----------------------------------------+
 |  PROTOTYPES                              |
 +-----------------------------------------*/
@@ -2333,7 +2335,7 @@ static int32 M72_Info(
  ****************************************************************************/
 static char* Ident( void )  /* nodoc */
 {
-    return( "M72 - M72 low-level driver: $Id: m72_drv.c,v 1.12 2010/04/20 15:10:03 amorbach Exp $" );
+    return( (char*) IdentString );
 }
 
 /********************************* Cleanup **********************************

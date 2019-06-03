@@ -32,10 +32,12 @@
 #include <MEN/men_typs.h>   /* system dependend definitions   */
 #include "m72_pld.h"		/* local prototypes */
 
+static const char IdentString[]=MENT_XSTR(MAK_REVISION);
+
 /* M72_PldIdent: return ident string */
 char* __M72_PldIdent( void )
 {
-	return( "driverID:$Id: m72_pld_01.c,v 1.5 2010/04/20 15:07:15 amorbach Exp $ FpgaId: CVSR/HWARE/Artikel/04/04M72/IC36RXXFEVinwork/Synthesis/m72.ttf V1.1 2008/02/06 12:43");
+	return( (char*) IdentString );
 }
 
 /* 
