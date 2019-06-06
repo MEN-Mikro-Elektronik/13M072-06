@@ -6,45 +6,45 @@
 	<date>2015-07-23</date>
 	<revision>3.2</revision>
 	<docroot>DRIVERS/MDIS_LL/M072/DOC/main.html</docroot>
-		<modellist>
-			<model>
-				<hwname>M72</hwname>
-				<modelname>M72</modelname>
-				<description>Motion Counter</description>
-				<devtype>MDIS</devtype>
-				<autoid>
-					<mmoduleid>0x53460048</mmoduleid>
-				</autoid>
-				<busif>M-Module</busif>
-				<swmodulelist>
-					<swmodule>
-						<name>m72</name>
-						<description>Driver for M72</description>
-						<type>Low Level Driver</type>
-						<makefilepath>M072/DRIVER/COM/driver.mak</makefilepath>
-					</swmodule>
-				</swmodulelist>
-			</model>
-			<model>
-				<hwname>M72</hwname>
-				<modelname>M72_PRE</modelname>
-				<description>Motion Counter with Pretrigger support</description>
-				<devtype>MDIS</devtype>
-				<autoid>
-					<mmoduleid>0x53460048</mmoduleid>
-				</autoid>
-				<busif>M-Module</busif>
-				<swmodulelist>
+	<modellist>
+		<model>
+			<hwname>M72</hwname>
+			<modelname>M72</modelname>
+			<description>Motion Counter</description>
+			<devtype>MDIS</devtype>
+			<autoid>
+				<mmoduleid>0x53460048</mmoduleid>
+			</autoid>
+			<busif>M-Module</busif>
+			<swmodulelist>
 				<swmodule>
-					<name>m72_pre</name>
-					<description>Driver for M72 pretrigger Variant</description>
+					<name>m72</name>
+					<description>Driver for M72</description>
 					<type>Low Level Driver</type>
-					<makefilepath>M072/DRIVER/COM/driver_pre.mak</makefilepath>
+					<makefilepath>M072/DRIVER/COM/driver.mak</makefilepath>
 				</swmodule>
-				</swmodulelist>
-			</model>
-		</modellist>
-		<settinglist>
+			</swmodulelist>
+		</model>
+		<model>
+			<hwname>M72</hwname>
+			<modelname>M72_PRE</modelname>
+			<description>Motion Counter with Pretrigger support</description>
+			<devtype>MDIS</devtype>
+			<autoid>
+				<mmoduleid>0x53460048</mmoduleid>
+			</autoid>
+			<busif>M-Module</busif>
+			<swmodulelist>
+			<swmodule>
+				<name>m72_pre</name>
+				<description>Driver for M72 pretrigger Variant</description>
+				<type>Low Level Driver</type>
+				<makefilepath>M072/DRIVER/COM/driver_pre.mak</makefilepath>
+			</swmodule>
+			</swmodulelist>
+		</model>
+	</modellist>
+	<settinglist>
 		<setting>
 			<name>ID_CHECK</name>
 			<description>Define if M-Module ID-PROM is checked</description>
