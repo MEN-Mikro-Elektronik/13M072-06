@@ -17,7 +17,7 @@
  *     Switches: -
  *
  *---------------------------------------------------------------------------
- * Copyright (c) 1999-2019, MEN Mikro Elektronik GmbH
+ * Copyright 1999-2019, MEN Mikro Elektronik GmbH
  ****************************************************************************/
 /*
 * This program is free software: you can redistribute it and/or modify
@@ -238,7 +238,7 @@ static void usage(int32 moreHelp)
 	printf("    -h           print detailed values for all options  \n");
 	printf("    -<opt>=?     print detailed values for option <opt> \n");
 	printf("    -?           print this help\n");
-	printf("Copyright (c) 1999-2019, MEN Mikro Elektronik GmbH%s\n\n", IdentString );
+	printf("Copyright 1999-2019, MEN Mikro Elektronik GmbH%s\n\n", IdentString );
 }
 
 /********************************* main *************************************
