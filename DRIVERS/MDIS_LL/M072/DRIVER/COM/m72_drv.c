@@ -219,6 +219,7 @@ static int32 Cleanup(LL_HANDLE *llHdl, int32 retCode);
 static void CounterStore(LL_HANDLE *llHdl, int32 ch, int32 cond);
 static void CounterClear(LL_HANDLE *llHdl, int32 ch, int32 cond);
 static void CounterLoad(LL_HANDLE *llHdl, int32 ch, int32 cond);
+static void localOsDelay(OSS_HANDLE *oss, int32 msec);
 
 /**************************** M72_GetEntry *********************************
  *
@@ -756,11 +757,11 @@ static int32 M72_Init(
 		DBGWRT_2((DBH," load PLD: size=%d\n",size));
 
 		if( (error= PLD_FLEX10K_LoadDirect(&maPld, dataP, size,
-										  PLD_FIRSTBLOCK+PLD_LASTBLOCK,
-										  llHdl->osHdl,
-										  (void (*)(void*, u_int32))OSS_Delay,
-										  PLD_IF_MASK, 
-										  PSDAT, PSCLK, PSCONF, PSSTAT, PSDONE)) )
+						   PLD_FIRSTBLOCK+PLD_LASTBLOCK,
+						   llHdl->osHdl,
+						   localOsDelay,
+						   PLD_IF_MASK,
+						   PSDAT, PSCLK, PSCONF, PSSTAT, PSDONE)) )
 			return( Cleanup(llHdl, ERR_PLD+error) );
 	}
 
@@ -2527,6 +2528,7 @@ static void CounterLoad(
 	}
 }
 
-
-
- 
+static void localOsDelay( OSS_HANDLE *oss, int32 msec )
+{
+	OSS_Delay(oss, msec);
+}
