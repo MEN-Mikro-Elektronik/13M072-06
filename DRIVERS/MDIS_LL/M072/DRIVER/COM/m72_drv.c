@@ -219,7 +219,7 @@ static int32 Cleanup(LL_HANDLE *llHdl, int32 retCode);
 static void CounterStore(LL_HANDLE *llHdl, int32 ch, int32 cond);
 static void CounterClear(LL_HANDLE *llHdl, int32 ch, int32 cond);
 static void CounterLoad(LL_HANDLE *llHdl, int32 ch, int32 cond);
-static void localOsDelay(OSS_HANDLE *oss, int32 msec);
+static void localOsDelay(void *oss, u_int32 msec);
 
 /**************************** M72_GetEntry *********************************
  *
@@ -2528,7 +2528,7 @@ static void CounterLoad(
 	}
 }
 
-static void localOsDelay( OSS_HANDLE *oss, int32 msec )
+static void localOsDelay( void *oss, u_int32 msec )
 {
 	OSS_Delay(oss, msec);
 }
