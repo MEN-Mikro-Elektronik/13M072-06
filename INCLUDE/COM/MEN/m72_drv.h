@@ -175,6 +175,8 @@
 #endif
 #endif /* _LL_DRV_ */
 
+void M72_OsDelay(void *oss, u_int32 msec);
+
 /*-----------------------------------------+
 |  BACKWARD COMPATIBILITY TO MDIS4         |
 +-----------------------------------------*/
