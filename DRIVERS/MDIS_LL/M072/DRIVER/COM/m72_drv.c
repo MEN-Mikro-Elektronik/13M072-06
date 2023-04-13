@@ -756,11 +756,11 @@ static int32 M72_Init(
 		DBGWRT_2((DBH," load PLD: size=%d\n",size));
 
 		if( (error= PLD_FLEX10K_LoadDirect(&maPld, dataP, size,
-										  PLD_FIRSTBLOCK+PLD_LASTBLOCK,
-										  llHdl->osHdl,
-										  (void (*)(void*, u_int32))OSS_Delay,
-										  PLD_IF_MASK, 
-										  PSDAT, PSCLK, PSCONF, PSSTAT, PSDONE)) )
+						   PLD_FIRSTBLOCK+PLD_LASTBLOCK,
+						   llHdl->osHdl,
+						   M72_OsDelay,
+						   PLD_IF_MASK,
+						   PSDAT, PSCLK, PSCONF, PSSTAT, PSDONE)) )
 			return( Cleanup(llHdl, ERR_PLD+error) );
 	}
 
@@ -2527,6 +2527,7 @@ static void CounterLoad(
 	}
 }
 
-
-
- 
+void M72_OsDelay( void *oss, u_int32 msec )
+{
+	OSS_Delay(oss, msec);
+}
